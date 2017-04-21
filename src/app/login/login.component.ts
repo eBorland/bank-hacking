@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../app.api';
+import { Router } from '@angular/router';
 
 interface Credentials {
   email: string;
@@ -18,11 +19,14 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor (private api: ApiService) {}
+  constructor (
+    private api: ApiService,
+    private router: Router
+  ) {}
 
   login(credentials: Credentials) {
     this.api.login(credentials).subscribe(
-      user => console.log('heree', user),
+      user => this.router.navigate(['/home']),
       error => this.errorMessage = <any>error);
   }
 }

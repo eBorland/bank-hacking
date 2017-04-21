@@ -10,12 +10,17 @@ interface User {
   fullName: string;
 }
 
+const apiURL = 'http://localhost:4000';
+const urls = {
+  login: `${apiURL}/login`
+}
+
 @Injectable()
 export class ApiService {
   constructor (private http: Http) {}
 
   login(credentials): Observable<User> {
-    return this.http.post('api/login', credentials)
+    return this.http.post(urls.login, credentials)
                     .map(this.parseData)
                     .catch(this.handleError);
   }
