@@ -1,0 +1,54 @@
+.global-header {
+  color: rgba(0, 0, 0, 0.5);
+  padding: 32px;
+  background: #fafafa;
+  border-bottom: 1px solid rgba(0,0,0,.06);;
+}
+.balance > label:last-child {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 50px;
+}
+.cash-flow {
+  margin-top: 16px;
+}
+.cash-flow label {
+  font-size: 30px;
+}
+.green,
+.cash-flow .in {
+  color: #36c745;
+}
+.red,
+.cash-flow .out {
+  color: rgb(207, 2, 43);
+}
+.account {
+  margin-top: 16px;
+}
+.account > label:last-child {
+  color: black;
+  font-size: 18px;
+}
+.transactions-list {
+  padding: 32px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.mat-list .mat-list-item,
+.mat-nav-list .mat-list-item,
+md-list-item {
+  margin-left: -32px;
+  margin-right: -32px;
+  padding-left: 32px;
+  padding-right: 32px;
+  cursor: default;
+  border-bottom: 1px solid rgba(0,0,0,.06);;
+}
+md-list-item h4 {
+  color: rgba(0, 0, 0, 0.8);
+}
+md-list-item p {
+  color: rgba(0, 0, 0, 0.5);
+}
+md-list-item:hover {
+  background: #fafafa;
+}

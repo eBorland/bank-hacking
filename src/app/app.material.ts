@@ -1,8 +1,26 @@
 import { NgModule } from '@angular/core';
-import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {
+  MdButtonModule,
+  MdCheckboxModule,
+  MdCardModule,
+  MdInputModule,
+  MdToolbarModule,
+  MdSidenavModule,
+  MdListModule
+} from '@angular/material';
+
+const MaterialImports = [
+  MdButtonModule,
+  MdCheckboxModule,
+  MdCardModule,
+  MdInputModule,
+  MdToolbarModule,
+  MdSidenavModule,
+  MdListModule
+];
 
 @NgModule({
-  imports: [MdButtonModule, MdCheckboxModule],
-  exports: [MdButtonModule, MdCheckboxModule],
+  imports: MaterialImports,
+  exports: MaterialImports,
 })
 export class MaterialModule { }

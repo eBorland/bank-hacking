@@ -1,0 +1,34 @@
+<div class="wire-form" fxLayout="row" fxLayoutWrap fxLayoutAlign="space-between">
+  <label class="title" fxFlex="100">
+    Origin
+  </label>
+  <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
+    <input mdInput placeholder="Sender" disabled value="Eric Borland">
+  </md-input-container>
+  <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
+    <input mdInput placeholder="Account" disabled value="5555555554800000">
+  </md-input-container>
+  <div class="horizontal-divider" fxFlex="100"></div>
+  <label class="title margin-top" fxFlex="100">
+    Receiver
+  </label>
+  <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
+    <input mdInput placeholder="Full name" [(ngModel)]="transaction.fullname">
+  </md-input-container>
+  <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
+    <input mdInput placeholder="Account Number (IBAN)" [(ngModel)]="transaction.account">
+  </md-input-container>
+  <div class="horizontal-divider" fxFlex="100"></div>
+  <label class="title margin-top" fxFlex="100">
+    Payment
+  </label>
+  <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
+    <input mdInput placeholder="Amount (€)" [(ngModel)]="transaction.amount">
+  </md-input-container>
+  <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
+    <input mdInput placeholder="Account Number (IBAN)" [(ngModel)]="transaction.message">
+  </md-input-container>
+  <div fxLayout="row" fxLayoutAlign="end end" fxFlex="100" class="margin-top margin-bottom">
+    <button color="primary" md-raised-button>Send</button>
+  </div>
+</div>
