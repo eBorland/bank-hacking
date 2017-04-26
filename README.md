@@ -19,6 +19,10 @@ Run `mongorestore --db=bank -u=test -p=test --dir=./backup/bank --drop`
 
 **HEADS UP!** This will detroy the current DB and restore the initial one
 
+### Installing dependencies
+
+Run `npm install` to install all node dependencies
+
 ### Runing the API
 
 Run `npm run start:api` to start the api
