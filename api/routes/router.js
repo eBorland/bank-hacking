@@ -19,7 +19,6 @@ module.exports = function (router) {
   router.get('/info/:id', logged, user.getInfo);
   router.get('/transactions/:id', logged, user.getTransactions);
   router.post('/wire', logged, user.wireTransaction);
-  /*
-  router.get('/verify-email/:id', user.verifyEmail);
-  */
+  router.get('/recover/:email', user.recover);
+  router.put('/reset-password', user.resetPassword);
 };

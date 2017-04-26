@@ -6,6 +6,8 @@ UserRouter.prototype.logout = logout;
 UserRouter.prototype.getInfo = getInfo;
 UserRouter.prototype.getTransactions = getTransactions;
 UserRouter.prototype.wireTransaction = wireTransaction;
+UserRouter.prototype.recover = recover;
+UserRouter.prototype.resetPassword = resetPassword;
 
 function login(req, res) {
   res.status(200).send(req.user);
@@ -41,7 +43,25 @@ function wireTransaction(req, res) {
     if (err) {
       return res.status(err.code || 500);
     }
-    res.sendStatus(200);
+    res.sendStatus(204);
+  });
+}
+
+function recover(req, res) {
+  User.recover(req.params.email, (err, result) => {
+    if (err) {
+      return res.status(err.code || 500);
+    }
+    res.status(200).send(result);
+  });
+}
+
+function resetPassword(req, res) {
+  User.resetPassword(req.body, (err, result) => {
+    if (err) {
+      return res.status(err.code || 500);
+    }
+    res.status(200).send(result);
   });
 }
 

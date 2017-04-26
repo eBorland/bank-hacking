@@ -11,7 +11,9 @@ const urls = {
   login: `${apiURL}/login`,
   info: `${apiURL}/info/`,
   transactions: `${apiURL}/transactions/`,
-  wire: `${apiURL}/wire`
+  wire: `${apiURL}/wire`,
+  recover: `${apiURL}/recover/`,
+  reset: `${apiURL}/reset-password`
 }
 
 const crossDomain = {
@@ -50,16 +52,24 @@ export class ApiService {
                     .catch(this.handleError);
   }
 
+  recover(email): Observable<any> {
+    return this.http.get(urls.recover + email, crossDomain)
+                    .map(this.parseData)
+                    .catch(this.handleError);
+  }
+
+  reset(user): Observable<any> {
+    return this.http.put(urls.reset, user, crossDomain)
+                    .map(this.parseData)
+                    .catch(this.handleError);
+  }
+
   private parseData(res: Response) {
     return res.json() || {};
   }
 
   private handleError (error: Response | any) {
     console.log('There has been an error!!', error);
-    if (error.status === 401) {
-      console.log('nagivating to login')
-      //this.router.navigateByUrl('/login');
-    }
     return Observable.throw(error);
   }
 }

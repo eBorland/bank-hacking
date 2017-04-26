@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { GlobalComponent } from './home/global/global.component';
 import { WireComponent } from './home/wire/wire.component';
+import { PasswordComponent } from './password/password.component';
 
 const appRoutes: Routes = [
   { path: '',
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
       { path: 'global', component: GlobalComponent },
       { path: 'wire', component: WireComponent }
     ]
-  }
+  },
+  { path: 'password', component: PasswordComponent }
 ];
 
 @NgModule({
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
     LoginComponent,
     HomeComponent,
     GlobalComponent,
-    WireComponent
+    WireComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,

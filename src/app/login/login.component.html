@@ -18,6 +18,11 @@
       <md-input-container>
         <input mdInput type="password" [(ngModel)]="user.password" (keyup.enter)="login(user, $event)" placeholder="Password">
       </md-input-container>
+      <div fxLayout="row" fxLayoutAlign="end end">
+        <a href="/password">
+          Forgot your password?
+        </a>
+      </div>
     </md-card-content>
     <md-card-actions fxLayoutAlign="end center">
       <button md-button color="primary" (click)="login(user, $event)" type="button"> LOGIN </button>

@@ -20,6 +20,8 @@ User.prototype.deserializeUser = deserializeUser;
 User.prototype.getInfo = getInfo;
 User.prototype.getTransactions = getTransactions;
 User.prototype.wireTransaction = wireTransaction;
+User.prototype.recover = recover;
+User.prototype.resetPassword = resetPassword;
 
 function login(email, password, callback) {
   console.log(`Login in with email:${email} and password:${password} ==> ${hash(password)}`);
@@ -109,6 +111,32 @@ function wireTransaction(user, transaction, callback) {
       db.collection('users').update(sender, push, next);
     }
   ], callback);
+}
+
+function recover(email, callback) {
+  var query = {
+    email: email
+  }
+  var options = {
+    _id: 1,
+    question: 1
+  };
+  var collection = db.collection('users');
+  collection.findOne(query, options, callback);
+}
+
+function resetPassword(data, callback) {
+  var query = {
+    _id: new ObjectID(data._id),
+    answer: data.answer
+  }
+  var update = {
+    $set: {
+      password: hash(data.newPassword)
+    }
+  };
+  var collection = db.collection('users');
+  collection.update(query, update, callback);
 }
 
 module.exports = new User();
