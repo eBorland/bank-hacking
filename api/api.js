@@ -46,9 +46,9 @@ var server = new Server(app);
 // Access-Control
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', req.headers.origin);
-  //res.header('Access-Control-Allow-Credentials', true);
-  //res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept');
   return next();
 });
 // Parse stringified queries
@@ -67,7 +67,8 @@ app.use(function (req, res, next) {
 app.use(expressSession({
   secret: config.session.secret,
   saveUninitialized: true,
-  resave: true
+  resave: true,
+  cookie: { httpOnly: false, secure: false }
 }));
 app.use(passport.initialize());
 app.use(passport.session());

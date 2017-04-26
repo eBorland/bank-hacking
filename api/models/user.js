@@ -1,5 +1,7 @@
 var crypto = require('crypto');
 var path = require('path');
+var ObjectID = require('mongodb').ObjectID;
+var async = require('async');
 var baseDir = '..';
 var db = require(path.join(__dirname, baseDir, 'lib/db'));
 
@@ -15,6 +17,9 @@ function User() {}
 User.prototype.login = login;
 User.prototype.serializeUser = serializeUser;
 User.prototype.deserializeUser = deserializeUser;
+User.prototype.getInfo = getInfo;
+User.prototype.getTransactions = getTransactions;
+User.prototype.wireTransaction = wireTransaction;
 
 function login(email, password, callback) {
   console.log(`Login in with email:${email} and password:${password} ==> ${hash(password)}`);
@@ -33,18 +38,77 @@ function login(email, password, callback) {
 }
 
 function serializeUser(user, callback) {
-  return callback(null, user._id);
-};
+  return callback(null, user._id.toString());
+}
 
 function deserializeUser(id, callback) {
   var query = {
     _id: new ObjectID(id)
   };
   var options = {
-    password: 0
+    id: 1
   };
   var collection = db.collection('users');
   collection.findOne(query, options, callback);
-};
+}
+
+function getInfo(id, callback) {
+  var query = {
+    _id: new ObjectID(id)
+  }
+  var options = {
+    email: 1,
+    fullName: 1,
+    image: 1
+  };
+  var collection = db.collection('users');
+  collection.findOne(query, options, callback);
+}
+
+function getTransactions(id, callback) {
+  var query = {
+    _id: new ObjectID(id)
+  }
+  var options = {
+    transactions: 1
+  };
+  var collection = db.collection('users');
+  collection.findOne(query, options, callback);
+}
+
+function wireTransaction(user, transaction, callback) {
+  transaction.date = new Date();
+  async.series([
+    next => {
+      const receiver = {
+        accountNumber: transaction.account
+      };
+      const push = {
+        $push: {
+          transactions: {
+            $each: [transaction],
+            $position: 0
+          }
+        }
+      }
+      db.collection('users').update(receiver, push, next);
+    },
+    next => {
+      transaction.amount = -transaction.amount;
+      const sender = {
+        _id: new ObjectID(user._id)
+      };
+      const push = {
+        $push: {
+          transactions: {
+            $each: [transaction],
+            $position: 0
+          }
+        }
+      }
+      db.collection('users').update(sender, push, next);
+    }
+  ], callback);
+}
 
 module.exports = new User();

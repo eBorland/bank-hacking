@@ -1,22 +1,25 @@
 <div class="global-header" fxLayout="row" fxLayoutAlign="center center" fxLayoutWrap>
+  <div fxFlex="100" fxLayout="row" fxLayoutAlign="end end">
+    <button md-mini-fab color="primary" (click)="loadTransactions()"><i class="material-icons link">refresh</i></button>
+  </div>
   <div>
     <div fxLayout="column" fxLayoutAlign="center start" class="balance">
       <label> Balance </label>
-      <label> $15,000.00 </label>
+      <label> €{{ total | number }} </label>
     </div>
   </div>
   <div fxFlex="100" fxLayout="row" fxLayoutAlign="center center" class="cash-flow">
     <div fxLayout="column" fxLayoutAlign="center end">
       <span> Revenues </span>
       <label class="in">
-        $20,000.00
+        €{{ positive | number }}
       </label>
     </div>
     <div class="vertical-divider"></div>
     <div fxLayout="column" fxLayoutAlign="center start">
       <span> Expenses </span>
       <label class="out">
-        $5,000.00
+        €{{ negative | number }}
       </label>
     </div>
   </div>
@@ -32,8 +35,12 @@
     <md-list-item *ngFor="let transaction of transactions">
       <i class="material-icons green" *ngIf="transaction.amount >= 0" md-list-icon>trending_up</i>
       <i class="material-icons red" *ngIf="transaction.amount < 0" md-list-icon>trending_down</i>
-      <h4 md-line *ngIf="transaction.amount >= 0">Congratulations! You have received <strong>{{ transaction.amount | number }}€</strong> from <strong>{{ transaction.source }}</strong>. {{ transaction.message || 'You\'re now rich!!' }}</h4>
-      <h4 md-line *ngIf="transaction.amount < 0">Damn it man! <strong>{{ transaction.source }}</strong> took <strong>{{ transaction.amount | number }}€</strong> from you. {{ transaction.message || 'Are u gonna allow that?' }}</h4>
+      <h4 md-line *ngIf="transaction.amount >= 0">Congratulations! You have received <strong>{{ transaction.amount | number }}€</strong> from <strong>{{ transaction.source || 'Unknown Hacker' }}</strong>.
+        <span [innerHTML]="transaction.message || ''"></span>
+      </h4>
+      <h4 md-line *ngIf="transaction.amount < 0">Damn it man! <strong>{{ transaction.source || 'Unknown hacker' }}</strong> took <strong>{{ transaction.amount | number }}€</strong> from you.
+        <span [innerHTML]="transaction.message || ''"></span>
+      </h4>
       <p md-line> {{ transaction.date | date }} </p>
     </md-list-item>
   </md-list>

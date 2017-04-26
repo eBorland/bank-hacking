@@ -1,17 +1,48 @@
+var User = require('../models/user');
 function UserRouter() {}
 
 UserRouter.prototype.login = login;
 UserRouter.prototype.logout = logout;
+UserRouter.prototype.getInfo = getInfo;
+UserRouter.prototype.getTransactions = getTransactions;
+UserRouter.prototype.wireTransaction = wireTransaction;
 
 function login(req, res) {
-  res.send(200, req.user);
+  res.status(200).send(req.user);
 }
 
 function logout(req, res) {
   if (req.logout) {
     req.logout();
   }
-  res.send(204);
+  res.sendStatus(204);
+}
+
+function getInfo(req, res) {
+  User.getInfo(req.params.id, (err, result) => {
+    if (err || !result) {
+      return res.status(err.code || 404);
+    }
+    res.status(200).send(result);
+  });
+}
+
+function getTransactions(req, res) {
+  User.getTransactions(req.params.id, (err, result) => {
+    if (err || !result) {
+      return res.status(err.code || 404);
+    }
+    res.status(200).send(result);
+  });
+}
+
+function wireTransaction(req, res) {
+  User.wireTransaction(req.user, req.body, (err, result) => {
+    if (err) {
+      return res.status(err.code || 500);
+    }
+    res.sendStatus(200);
+  });
 }
 
 module.exports = new UserRouter();

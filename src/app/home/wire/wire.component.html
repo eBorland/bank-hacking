@@ -13,7 +13,7 @@
     Receiver
   </label>
   <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
-    <input mdInput placeholder="Full name" [(ngModel)]="transaction.fullname">
+    <input mdInput placeholder="Full name" [(ngModel)]="transaction.source">
   </md-input-container>
   <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
     <input mdInput placeholder="Account Number (IBAN)" [(ngModel)]="transaction.account">
@@ -23,12 +23,12 @@
     Payment
   </label>
   <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
-    <input mdInput placeholder="Amount (€)" [(ngModel)]="transaction.amount">
+    <input mdInput type="number" placeholder="Amount (€)" min="0" [(ngModel)]="transaction.amount">
   </md-input-container>
   <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
-    <input mdInput placeholder="Account Number (IBAN)" [(ngModel)]="transaction.message">
+    <input mdInput placeholder="Concept or message" [(ngModel)]="transaction.message">
   </md-input-container>
   <div fxLayout="row" fxLayoutAlign="end end" fxFlex="100" class="margin-top margin-bottom">
-    <button color="primary" md-raised-button>Send</button>
+    <button color="primary" md-raised-button (click)="wire(transaction)">Send</button>
   </div>
 </div>

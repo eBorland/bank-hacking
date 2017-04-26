@@ -10,6 +10,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MaterialModule } from './app.material';
 
 import { AppComponent } from './app.component';
+import { ApiService } from './app.api';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { GlobalComponent } from './home/global/global.component';
@@ -22,7 +23,7 @@ const appRoutes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   {
-    path: 'home',
+    path: 'home/:id',
     component: HomeComponent,
     children: [
       {
@@ -54,7 +55,7 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -42,3 +42,6 @@ body {
   font-size: 25px;
   color: rgba(0, 0, 0, 0.8);
 }
+.mat-simple-snackbar-message {
+  padding-right: 32px;
+}
