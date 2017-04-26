@@ -31,5 +31,17 @@ Run `npm run start:api` to start the api
 
 Run `npm run start:app` to start the application server and nagivate to `http://localhost:4200` to start playing with it
 
+## Exposing the server to the internet
+Once you are running the app and the api in your local environment, you can expose them using **ngrok**
+
+### Expose the API
+
+Run `npm run expose:api` to expose the api
+
+### Expose the APP
+
+Run `npm run expose:app` to expose the app
+
+
 
 #### Happy Hacking

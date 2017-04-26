@@ -6,6 +6,8 @@
     "ng": "ng",
     "start:app": "ng serve",
     "start:api": "nodemon ./api/api.js",
+    "expose:app": "./ngrok http 4200",
+    "expose:api": "./ngrok http 4000",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
