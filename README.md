@@ -15,7 +15,7 @@ The slides show the most typical attacks in Web Servers and suggests some defens
 
 ### Populating the DB
 
-Run `mongorestore --db=bank -u=test -p=test --dir=./backup/ --drop`
+Run `mongorestore --db=bank -u=test -p=test --dir=./backup/bank --drop`
 
 **HEADS UP!** This will detroy the current DB and restore the initial one
 
