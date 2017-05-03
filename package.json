@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start:app": "ng serve",
+    "start:app": "ng serve --host 0.0.0.0",
     "start:api": "nodemon ./api/api.js",
     "expose:app": "./ngrok http 4200",
     "expose:api": "./ngrok http 4000",

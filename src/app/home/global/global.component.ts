@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl, SafeHtml } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { ApiService } from '../../app.api';
@@ -7,7 +8,7 @@ interface Transaction {
   amount: number;
   source: string;
   date: Date;
-  message?: string;
+  message?: any;
 }
 
 @Component({
@@ -25,7 +26,8 @@ export class GlobalComponent {
   constructor (
     private api: ApiService,
     public snackBar: MdSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -43,10 +45,11 @@ export class GlobalComponent {
 
   computeTransactions(response) {
     this.positive = 0;
-    this.negative= 0;
+    this.negative = 0;
     this.total = 0;
     this.transactions = response.transactions;
     this.transactions.forEach(transaction => {
+      transaction.message = this.sanitizer.bypassSecurityTrustHtml(transaction.message);
       if (transaction.amount > 0) {
         this.positive += transaction.amount;
       } else {

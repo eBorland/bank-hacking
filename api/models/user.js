@@ -24,11 +24,11 @@ User.prototype.recover = recover;
 User.prototype.resetPassword = resetPassword;
 
 function login(email, password, callback) {
-  console.log(`Login in with email:${email} and password:${password} ==> ${hash(password)}`);
+  //console.log(`Login in with email:${email} and password:${password} ==> ${hash(password)}`);
   var collection = db.collection('users');
   var query = {
     email: email,
-    password: hash(password),
+    password: typeof password === 'string'? hash(password) : password,
     //password: hash(password + 'SALT')
   };
   var options = {
