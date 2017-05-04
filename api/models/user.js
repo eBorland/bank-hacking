@@ -24,12 +24,10 @@ User.prototype.recover = recover;
 User.prototype.resetPassword = resetPassword;
 
 function login(email, password, callback) {
-  //console.log(`Login in with email:${email} and password:${password} ==> ${hash(password)}`);
   var collection = db.collection('users');
   var query = {
     email: email,
-    password: typeof password === 'string'? hash(password) : password,
-    //password: hash(password + 'SALT')
+    password: typeof password === 'string'? hash(password) : password
   };
   var options = {
     password: false
@@ -98,11 +96,6 @@ function wireTransaction(user, transaction, callback) {
     },
     next => {
       transaction.amount = -transaction.amount;
-      /*
-      const sender = {
-        _id: new ObjectID(user._id)
-      };
-      */
       const sender = {
         accountNumber: transaction.source
       };

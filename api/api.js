@@ -86,8 +86,6 @@ passport.deserializeUser(User.deserializeUser);
 
 // GZIP Compression
 app.use(compression());
-// X-Powered-By false
-//app.set('x-powered-by', false);
 // BodyParser
 app.use(bodyParser.urlencoded({
   extended: true,
