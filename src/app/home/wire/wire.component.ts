@@ -41,8 +41,7 @@ export class WireComponent {
 
   ngOnInit() {
     this.route.parent.params.subscribe(params => {
-      this.id = params['id'];
-      this.api.getInfo(this.id).subscribe(
+      this.api.getInfo().subscribe(
         user => this.user = user,
         error => this.snackBar.open('Your request could not be performed, please try again later!', 'Got it', { duration: 300000 }));
     });

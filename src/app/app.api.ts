@@ -10,7 +10,7 @@ const apiURL = 'http://localhost:4000';
 //const apiURL = 'https://localhost:4001';
 const urls = {
   login: `${apiURL}/login`,
-  info: `${apiURL}/info/`,
+  info: `${apiURL}/info`,
   transactions: `${apiURL}/transactions/`,
   wire: `${apiURL}/wire`,
   recover: `${apiURL}/recover/`,
@@ -36,8 +36,8 @@ export class ApiService {
   }
 
 
-  getInfo(id): Observable<any> {
-    return this.http.get(urls.info + id, crossDomain)
+  getInfo(): Observable<any> {
+    return this.http.get(urls.info, crossDomain)
                     .map(this.parseData)
                     .catch(this.handleError);
   }
