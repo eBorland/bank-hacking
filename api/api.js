@@ -96,7 +96,15 @@ app.use(bodyParser.json({
 }));
 // Router
 require(path.join(__dirname, 'routes/router'))(app);
-
+// Error Handler
+app.use(function(err, req, res, next) {
+  if (err) {
+    console.log('There has been an uncontrolled error.\nNo stack trace has been leaked doh!', err);
+    res.sendStatus(err.status || 500);
+  } else {
+    return next();
+  }
+});
 
 // Starting DB and API
 (function initializeAPI() {
