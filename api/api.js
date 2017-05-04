@@ -74,7 +74,8 @@ app.use(passport.session());
 passport.use(new LocalStrategy(config.credentials, User.login));
 passport.serializeUser(User.serializeUser);
 passport.deserializeUser(User.deserializeUser);
-
+// X-Powered-By false
+app.set('x-powered-by', false);
 // GZIP Compression
 app.use(compression());
 // BodyParser
