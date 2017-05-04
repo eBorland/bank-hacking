@@ -7,8 +7,10 @@
 // All rights reserved
 //
 
+var fs = require('fs');
 var express = require('express');
 var http = require('http');
+var https = require('https');
 var expressSession = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -31,7 +33,8 @@ const config = {
     url: 'mongodb://test:test@localhost/bank'
   },
   server: {
-    port: 4000
+    port: 4000,
+    portSSL: 4001
   },
   credentials: {
     usernameField: 'email',
@@ -40,6 +43,12 @@ const config = {
 }
 
 // Initializing the app
+var privateKey  = fs.readFileSync('ssl/server.key', 'utf8');
+var certificate = fs.readFileSync('ssl/server.crt', 'utf8');
+var credentials = {
+  key: privateKey,
+  cert: certificate
+};
 var app = express();
 
 // Access-Control
@@ -95,20 +104,22 @@ require(path.join(__dirname, 'routes/router'))(app);
   mongo.connect(config.db.url, db => {
     console.log('Starting express server...');
     http.createServer(app).listen(config.server.port, err => {
-      if (err) {
-        console.error(err, 'Error starting BankHacking-API');
-      } else {
-        console.log({
-          port: config.server.port,
-          version: package.version
-        }, 'BankHacking-API Running');
-        console.log('\n\n****************************************');
-        console.log('****************************************');
-        console.log('           BankHacking API');
-        console.log('----------------------------------------');
-        console.log('            version: ' + package.version);
-        console.log('****************************************\n\n');
-      }
+      https.createServer(credentials, app).listen(config.server.portSSL, err => {
+        if (err) {
+          console.error(err, 'Error starting BankHacking-API');
+        } else {
+          console.log({
+            port: config.server.port,
+            version: package.version
+          }, 'BankHacking-API Running');
+          console.log('\n\n****************************************');
+          console.log('****************************************');
+          console.log('           BankHacking API');
+          console.log('----------------------------------------');
+          console.log('            version: ' + package.version);
+          console.log('****************************************\n\n');
+        }
+      });
     });
   });
 })();
