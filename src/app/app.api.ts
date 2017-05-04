@@ -6,8 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-const apiURL = 'http://localhost:4000';
-//const apiURL = 'https://localhost:4001';
+const apiURL = 'https://localhost:4001';
 const urls = {
   login: `${apiURL}/login`,
   info: `${apiURL}/info/`,
