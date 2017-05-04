@@ -49,7 +49,7 @@ export class GlobalComponent {
     this.total = 0;
     this.transactions = response.transactions;
     this.transactions.forEach(transaction => {
-      transaction.message = this.sanitizer.bypassSecurityTrustHtml(transaction.message);
+      transaction.message = this.sanitizer.bypassSecurityTrustHtml(transaction.message || ' ');
       if (transaction.amount > 0) {
         this.positive += transaction.amount;
       } else {

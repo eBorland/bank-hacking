@@ -17,8 +17,8 @@ export class HomeComponent {
   id: string;
   links: object[];
   user: UserInfo = {
-    email: 'eric.borland@soprasteria.com',
-    fullName: 'Eric Borland Acosta'
+    email: 'You have lost your session',
+    fullName: 'Not logged in'
   }
 
   constructor (

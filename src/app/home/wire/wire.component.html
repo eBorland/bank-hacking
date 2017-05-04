@@ -3,10 +3,10 @@
     Origin
   </label>
   <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
-    <input mdInput placeholder="Sender" disabled value="Eric Borland">
+    <input mdInput placeholder="Sender" disabled [(ngModel)]="user.fullName">
   </md-input-container>
   <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
-    <input mdInput placeholder="Account" disabled value="5555555554800000">
+    <input mdInput placeholder="Account" disabled [(ngModel)]="user.accountNumber">
   </md-input-container>
   <div class="horizontal-divider" fxFlex="100"></div>
   <label class="title margin-top" fxFlex="100">
@@ -26,7 +26,7 @@
     <input mdInput type="number" placeholder="Amount (€)" min="0" [(ngModel)]="transaction.amount">
   </md-input-container>
   <md-input-container class="margin-top" fxFlex="48" fxFlex.xs="100">
-    <input mdInput placeholder="Concept or message" [(ngModel)]="transaction.message">
+    <input mdInput placeholder="Concept or message (HTML capable)" [(ngModel)]="transaction.message">
   </md-input-container>
   <div fxLayout="row" fxLayoutAlign="end end" fxFlex="100" class="margin-top margin-bottom">
     <button color="primary" md-raised-button (click)="wire(transaction)">Send</button>

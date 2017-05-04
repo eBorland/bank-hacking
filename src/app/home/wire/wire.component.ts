@@ -52,6 +52,7 @@ export class WireComponent {
     if (!transaction.account || transaction.amount < 0) {
       return this.snackBar.open('Woah! Are you cheating?', 'I\'m sorry, it won\'t happen again', { duration: 300000 });
     }
+    transaction.source = this.user.accountNumber;
     this.api.wireTransaction(transaction).subscribe(
       result => this.router.navigate(['home', this.id, 'global']),
       error => this.snackBar.open('Your request could not be performed, please try again later!', 'Got it', { duration: 300000 }));

@@ -61,7 +61,8 @@ function getInfo(id, callback) {
   var options = {
     email: 1,
     fullName: 1,
-    image: 1
+    image: 1,
+    accountNumber: 1
   };
   var collection = db.collection('users');
   collection.findOne(query, options, callback);
@@ -97,8 +98,13 @@ function wireTransaction(user, transaction, callback) {
     },
     next => {
       transaction.amount = -transaction.amount;
+      /*
       const sender = {
         _id: new ObjectID(user._id)
+      };
+      */
+      const sender = {
+        accountNumber: transaction.source
       };
       const push = {
         $push: {
