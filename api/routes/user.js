@@ -23,7 +23,7 @@ function logout(req, res) {
 function getInfo(req, res) {
   User.getInfo(req.params.id, (err, result) => {
     if (err || !result) {
-      return res.status(err.code || 404);
+      return res.sendStatus(err.code || 404);
     }
     res.status(200).send(result);
   });
@@ -32,7 +32,7 @@ function getInfo(req, res) {
 function getTransactions(req, res) {
   User.getTransactions(req.params.id, (err, result) => {
     if (err || !result) {
-      return res.status(err.code || 404);
+      return res.sendStatus(err.code || 404);
     }
     res.status(200).send(result);
   });
@@ -41,7 +41,7 @@ function getTransactions(req, res) {
 function wireTransaction(req, res) {
   User.wireTransaction(req.user, req.body, (err, result) => {
     if (err) {
-      return res.status(err.code || 500);
+      return res.sendStatus(err.code || 500);
     }
     res.sendStatus(204);
   });
@@ -50,7 +50,7 @@ function wireTransaction(req, res) {
 function recover(req, res) {
   User.recover(req.params.email, (err, result) => {
     if (err) {
-      return res.status(err.code || 500);
+      return res.sendStatus(err.code || 500);
     }
     res.status(200).send(result);
   });
@@ -59,7 +59,7 @@ function recover(req, res) {
 function resetPassword(req, res) {
   User.resetPassword(req.body, (err, result) => {
     if (err) {
-      return res.status(err.code || 500);
+      return res.sendStatus(err.code || 500);
     }
     res.status(200).send(result);
   });
