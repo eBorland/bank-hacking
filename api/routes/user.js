@@ -21,7 +21,7 @@ function logout(req, res) {
 }
 
 function getInfo(req, res) {
-  User.getInfo(req.params.id, (err, result) => {
+  User.getInfo(req.user._id, (err, result) => {
     if (err || !result) {
       return res.sendStatus(err.code || 404);
     }

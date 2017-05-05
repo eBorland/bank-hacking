@@ -44,7 +44,7 @@ export class HomeComponent {
         icon: 'power_settings_new'
       }];
 
-      this.api.getInfo(this.id).subscribe(
+      this.api.getInfo().subscribe(
         user => this.user = user,
         error => this.snackBar.open('Your request could not be performed, please try again later!', 'Got it', { duration: 300000 }));
     });
