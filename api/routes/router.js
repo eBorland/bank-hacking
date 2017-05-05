@@ -17,6 +17,7 @@ module.exports = function (router) {
   router.post('/login', passport.authenticate('local'), user.login);
   router.get('/logout', logged, user.logout);
   router.get('/info/:id', logged, user.getInfo);
+  router.get('/image', logged, user.getImage);
   router.get('/transactions/:id', logged, user.getTransactions);
   router.post('/wire', logged, user.wireTransaction);
   router.get('/recover/:email', user.recover);

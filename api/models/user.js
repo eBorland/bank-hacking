@@ -1,9 +1,11 @@
+var fs = require('fs');
 var crypto = require('crypto');
 var path = require('path');
 var ObjectID = require('mongodb').ObjectID;
 var async = require('async');
 var baseDir = '..';
 var db = require(path.join(__dirname, baseDir, 'lib/db'));
+var imagesPath = path.join(__dirname, baseDir, 'images/');
 
 var hash = function (password) {
   var hash = crypto.createHash('md5');
@@ -18,6 +20,7 @@ User.prototype.login = login;
 User.prototype.serializeUser = serializeUser;
 User.prototype.deserializeUser = deserializeUser;
 User.prototype.getInfo = getInfo;
+User.prototype.getImage = getImage;
 User.prototype.getTransactions = getTransactions;
 User.prototype.wireTransaction = wireTransaction;
 User.prototype.recover = recover;
@@ -64,6 +67,10 @@ function getInfo(id, callback) {
   };
   var collection = db.collection('users');
   collection.findOne(query, options, callback);
+}
+
+function getImage(id, callback) {
+  fs.readFile(path.join(imagesPath, id.toString() + '.jpg'), callback);
 }
 
 function getTransactions(id, callback) {
