@@ -26,8 +26,8 @@ User.prototype.resetPassword = resetPassword;
 function login(email, password, callback) {
   var collection = db.collection('users');
   var query = {
-    email: email,
-    password: typeof password === 'string'? hash(password) : password
+    email: email.toString(),
+    password: hash(password.toString())
   };
   var options = {
     password: false
