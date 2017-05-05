@@ -97,7 +97,7 @@ function wireTransaction(user, transaction, callback) {
     next => {
       transaction.amount = -transaction.amount;
       const sender = {
-        accountNumber: transaction.source
+        _id: user._id // This cannot be hacked since it comes from the session
       };
       const push = {
         $push: {
