@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeHtml } from '@angular/platform-browser';
+import { SecurityContext } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MdSnackBar } from '@angular/material';
 import { ApiService } from '../../app.api';
@@ -49,7 +50,7 @@ export class GlobalComponent {
     this.total = 0;
     this.transactions = response.transactions;
     this.transactions.forEach(transaction => {
-      transaction.message = this.sanitizer.bypassSecurityTrustHtml(transaction.message || ' ');
+      transaction.message = this.sanitizer.sanitize(SecurityContext.HTML, transaction.message || ' ');
       if (transaction.amount > 0) {
         this.positive += transaction.amount;
       } else {
