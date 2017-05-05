@@ -4,6 +4,7 @@ function UserRouter() {}
 UserRouter.prototype.login = login;
 UserRouter.prototype.logout = logout;
 UserRouter.prototype.getInfo = getInfo;
+UserRouter.prototype.getImage = getImage;
 UserRouter.prototype.getTransactions = getTransactions;
 UserRouter.prototype.wireTransaction = wireTransaction;
 UserRouter.prototype.recover = recover;
@@ -22,6 +23,15 @@ function logout(req, res) {
 
 function getInfo(req, res) {
   User.getInfo(req.params.id, (err, result) => {
+    if (err || !result) {
+      return res.sendStatus(err.code || 404);
+    }
+    res.status(200).send(result);
+  });
+}
+
+function getImage(req, res) {
+  User.getImage(req.user._id, (err, result) => {
     if (err || !result) {
       return res.sendStatus(err.code || 404);
     }
