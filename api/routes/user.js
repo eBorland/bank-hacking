@@ -39,6 +39,9 @@ function getTransactions(req, res) {
 }
 
 function wireTransaction(req, res) {
+  if (!req.body.amount || req.body.amount < 0) {
+    return res.sendStatus(400);
+  }
   User.wireTransaction(req.user, req.body, (err, result) => {
     if (err) {
       return res.sendStatus(err.code || 500);
